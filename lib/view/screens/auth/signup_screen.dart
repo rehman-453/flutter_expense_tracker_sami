@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_button.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_text_field.dart';
-import 'package:flutter_expense_tracker_sami/view/screens/auth/login_screen.dart';
+import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_home_nav_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -153,7 +153,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   onButtonTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => BottomHomeNavScreen(),
+                      ),
                     );
                   },
                 ),
