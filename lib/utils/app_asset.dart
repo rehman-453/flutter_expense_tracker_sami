@@ -9,4 +9,7 @@ class AppAsset {
   static final String healthIcon = 'assets/icons/health_icon.svg';
   static final String shoppingIcon = 'assets/icons/shopping_icon.svg';
   static final String billIcon = 'assets/icons/bill_icon.svg';
+  static final String searchIcon = 'assets/icons/search_icon.svg';
+  static final String leftArrowIcon = 'assets/icons/left_arrow_icon.svg';
+  static final String rightArrowIcon = 'assets/icons/right_arrow_icon.svg';
 }

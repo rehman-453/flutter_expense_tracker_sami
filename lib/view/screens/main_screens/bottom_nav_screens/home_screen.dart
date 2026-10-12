@@ -119,14 +119,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              ListView.separated(
-                itemCount: listOfExpenses.length,
-                shrinkWrap: true,
-                separatorBuilder: (context, index) => SizedBox(height: 10),
-                itemBuilder: (context, index) {
-                  return _expenseCard(listOfExpenses[index]);
-                },
+              Expanded(
+                child: ListView.separated(
+                  itemCount: listOfExpenses.length,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    return _expenseCard(listOfExpenses[index]);
+                  },
+                ),
               ),
+              // ListView.separated(
+              //   itemCount: listOfExpenses.length,
+              //   shrinkWrap: true,
+              //   separatorBuilder: (context, index) => SizedBox(height: 10),
+              //   itemBuilder: (context, index) {
+              //     return _expenseCard(listOfExpenses[index]);
+              //   },
+              // ),
             ],
           ),
         ),

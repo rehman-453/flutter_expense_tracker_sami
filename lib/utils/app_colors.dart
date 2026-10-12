@@ -16,4 +16,6 @@ class AppColors {
   static final Color colorFDE1DE = Color(0xffFDE1DE);
   static final Color colorFCE1EE = Color(0xffFCE1EE);
   static final Color colorEADFFD = Color(0xffEADFFD);
+  static final Color colorF4F6F8 = Color(0xffF4F6F8);
+  static final Color colorEEF1F4 = Color(0xffEEF1F4);
 }
