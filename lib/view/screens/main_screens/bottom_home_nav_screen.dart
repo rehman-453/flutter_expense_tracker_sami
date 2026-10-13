@@ -27,7 +27,7 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
   List listOfScreens = [
     HomeScreen(),
     ExpenseScreen(),
-    AddExpenses(),
+    // AddExpenses(),
     SummaryScreen(),
     SettingScreen(),
   ];
@@ -36,6 +36,23 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: listOfScreens[_selectedIndex],
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddExpenses()),
+          );
+        },
+        backgroundColor: AppColors.greenColor,
+        child: SvgPicture.asset(
+          AppAsset.addIcon,
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        ),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -46,23 +63,23 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
             icon: SvgPicture.asset(AppAsset.expenseIcon),
             label: 'Expense',
           ),
-          BottomNavigationBarItem(
-            icon: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: AppColors.greenColor,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: SvgPicture.asset(
-                AppAsset.addIcon,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            label: 'Add Expense',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Container(
+          //     padding: const EdgeInsets.all(10),
+          //     decoration: BoxDecoration(
+          //       color: AppColors.greenColor,
+          //       borderRadius: BorderRadius.circular(25),
+          //     ),
+          //     child: SvgPicture.asset(
+          //       AppAsset.addIcon,
+          //       colorFilter: const ColorFilter.mode(
+          //         Colors.white,
+          //         BlendMode.srcIn,
+          //       ),
+          //     ),
+          //   ),
+          //   label: 'Add Expense',
+          // ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppAsset.summaryIcon),
             label: 'Summary',
