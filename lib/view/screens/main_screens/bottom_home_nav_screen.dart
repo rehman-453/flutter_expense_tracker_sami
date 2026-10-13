@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
+import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/add_expenses.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/expense_screen.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/home_screen.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/setting_screen.dart';
@@ -26,6 +27,7 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
   List listOfScreens = [
     HomeScreen(),
     ExpenseScreen(),
+    AddExpenses(),
     SummaryScreen(),
     SettingScreen(),
   ];
@@ -43,6 +45,23 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppAsset.expenseIcon),
             label: 'Expense',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: AppColors.greenColor,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: SvgPicture.asset(
+                AppAsset.addIcon,
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            label: 'Add Expense',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppAsset.summaryIcon),

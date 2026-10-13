@@ -17,31 +17,51 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ExpenseModel> listOfExpenses = <ExpenseModel>[
     ExpenseModel(
       name: "Biryani",
-      category: ExpenseCategory.food,
+      category: ExpenseCategory(
+        name: "Food",
+        icon: AppAsset.foodIcon,
+        color: AppColors.colorFFF1D6,
+      ),
       createdAt: DateTime.now(),
       expValue: 850,
     ),
     ExpenseModel(
       name: "Careem Ride",
-      category: ExpenseCategory.tansport,
+      category: ExpenseCategory(
+        name: "Transport",
+        icon: AppAsset.transportIcon,
+        color: AppColors.colorDCEBFF,
+      ),
       createdAt: DateTime.now(),
       expValue: 620,
     ),
     ExpenseModel(
       name: "Pharmacy",
-      category: ExpenseCategory.health,
+      category: ExpenseCategory(
+        name: "Health",
+        icon: AppAsset.healthIcon,
+        color: AppColors.colorFDE1DE,
+      ),
       createdAt: DateTime.now(),
       expValue: 940,
     ),
     ExpenseModel(
       name: "Daraz Order",
-      category: ExpenseCategory.shopping,
+      category: ExpenseCategory(
+        name: "Shopping",
+        icon: AppAsset.shoppingIcon,
+        color: AppColors.colorFCE1EE,
+      ),
       createdAt: DateTime.now(),
       expValue: 3200,
     ),
     ExpenseModel(
       name: "K-Electric",
-      category: ExpenseCategory.bill,
+      category: ExpenseCategory(
+        name: "Bill",
+        icon: AppAsset.billIcon,
+        color: AppColors.colorEADFFD,
+      ),
       createdAt: DateTime.now(),
       expValue: 7400,
     ),
@@ -145,67 +165,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _iconContainer(ExpenseCategory expenseCategory) {
-    switch (expenseCategory) {
-      case ExpenseCategory.food:
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.colorFFF1D6,
-          ),
-          child: SvgPicture.asset(AppAsset.foodIcon),
-        );
-
-      case ExpenseCategory.tansport:
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.colorDCEBFF,
-          ),
-          child: SvgPicture.asset(AppAsset.transportIcon),
-        );
-
-      case ExpenseCategory.health:
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.colorFDE1DE,
-          ),
-          child: SvgPicture.asset(AppAsset.healthIcon),
-        );
-
-      case ExpenseCategory.shopping:
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.colorFCE1EE,
-          ),
-          child: SvgPicture.asset(AppAsset.shoppingIcon),
-        );
-
-      case ExpenseCategory.bill:
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.colorEADFFD,
-          ),
-          child: SvgPicture.asset(AppAsset.billIcon),
-        );
-
-      default:
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.colorFFF1D6,
-          ),
-          child: SvgPicture.asset(AppAsset.healthIcon),
-        );
-    }
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: expenseCategory.color,
+      ),
+      child: SvgPicture.asset(expenseCategory.icon),
+    );
   }
 
   Widget _expenseCard(ExpenseModel expenseModel) {

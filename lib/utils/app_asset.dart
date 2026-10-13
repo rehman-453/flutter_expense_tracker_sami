@@ -12,4 +12,9 @@ class AppAsset {
   static final String searchIcon = 'assets/icons/search_icon.svg';
   static final String leftArrowIcon = 'assets/icons/left_arrow_icon.svg';
   static final String rightArrowIcon = 'assets/icons/right_arrow_icon.svg';
+  static final String addIcon = 'assets/icons/add_icon.svg';
+  static final String crossIcon = 'assets/icons/cross_icon.svg';
+  static final String funIcon = "assets/icons/fun_icon.svg";
+  static final String educationIcon = 'assets/icons/education_icon.svg';
+  static final String otherIcon = 'assets/icons/other_icon.svg';
 }

@@ -5,7 +5,8 @@ import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_text_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
+
+// import 'package:intl/intl.dart';
 
 // import 'package:flutter_svg/svg.dart';
 
@@ -20,13 +21,21 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   List<ExpenseModel> todayExpenses = <ExpenseModel>[
     ExpenseModel(
       name: "Biryani Lunch",
-      category: ExpenseCategory.food,
+      category: ExpenseCategory(
+        name: "Food",
+        icon: AppAsset.foodIcon,
+        color: AppColors.colorFFF1D6,
+      ),
       createdAt: DateTime.now(),
       expValue: 850,
     ),
     ExpenseModel(
       name: "Careem Ride",
-      category: ExpenseCategory.tansport,
+      category: ExpenseCategory(
+        name: "Transport",
+        icon: AppAsset.transportIcon,
+        color: AppColors.colorDCEBFF,
+      ),
       createdAt: DateTime.now(),
       expValue: 620,
     ),
@@ -85,19 +94,24 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   ),
                 ],
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  spacing: 8,
-                  children: [
-                    _chip("All", true),
-                    _chip("Food", false),
-                    _chip("Transport", false),
-                    _chip("Health", false),
-                    _chip("Shopping", false),
-                    _chip("Bill", false),
-                    _chip("Fun", false),
-                  ],
+              Expanded(
+                // scrollDirection: Axis.horizontal,
+
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    spacing: 8,
+                    children: [
+                      _chip("All", true),
+                      _chip("Food", false),
+                      _chip("Transport", false),
+                      _chip("Health", false),
+                      _chip("Shopping", false),
+                      _chip("Bill", false),
+                      _chip("Fun", false),
+                      _chip("Fun", false),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
