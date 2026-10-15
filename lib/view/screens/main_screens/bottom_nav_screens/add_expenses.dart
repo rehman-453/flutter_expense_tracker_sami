@@ -409,6 +409,7 @@ class _AddExpensesState extends State<AddExpenses> {
         category: selectedCategory,
         createdAt: selectedDate,
         expValue: double.parse(expenseTextEditingController.text),
+        note: noteTextEditingController.text,
       ),
     );
     Navigator.pop(context);

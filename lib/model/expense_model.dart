@@ -5,12 +5,14 @@ class ExpenseModel {
   final ExpenseCategory category;
   final DateTime createdAt;
   final double expValue;
+  final String? note;
 
   const ExpenseModel({
     required this.name,
     required this.category,
     required this.createdAt,
     required this.expValue,
+    this.note,
   });
 }
 

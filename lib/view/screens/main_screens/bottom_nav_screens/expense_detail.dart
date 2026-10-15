@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expense_tracker_sami/model/expense_model.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_button.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/edit_expense.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
+
+// import 'package:intl/intl.dart';
 
 class ExpenseDetail extends StatefulWidget {
-  const ExpenseDetail({super.key});
+  final ExpenseModel expenseModel;
+  final Widget categoryIcon;
+  const ExpenseDetail({
+    super.key,
+    required this.expenseModel,
+    required this.categoryIcon,
+  });
 
   @override
   State<ExpenseDetail> createState() => _ExpenseDetailState();
@@ -62,27 +72,11 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                       child: SvgPicture.asset(AppAsset.deleteIcon),
                     ),
                   ),
-                  // Container(
-                  //   padding: EdgeInsets.all(10),
-                  //   decoration: BoxDecoration(
-                  //     color: AppColors.pureWhiteColor,
-                  //     shape: BoxShape.circle,
-                  //     border: Border.all(color: AppColors.whiteColor),
-                  //   ),
-                  //   child: SvgPicture.asset(AppAsset.deleteIcon),
-                  // ),
                 ],
               ),
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.colorFFF1D6,
-                ),
-                child: SvgPicture.asset(AppAsset.foodIcon),
-              ),
+              widget.categoryIcon,
               Text(
-                "Rs 850",
+                "Rs ${widget.expenseModel.expValue.toString()}",
                 style: TextStyle(
                   fontSize: 44,
                   fontWeight: FontWeight.bold,
@@ -90,7 +84,7 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                 ),
               ),
               Text(
-                "Biryani Lunch",
+                widget.expenseModel.name,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -101,7 +95,7 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: AppColors.pureWhiteColor,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
                   children: [
@@ -125,7 +119,7 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                                 ),
                               ),
                               Text(
-                                "Food",
+                                widget.expenseModel.category.name,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -159,7 +153,8 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                                 ),
                               ),
                               Text(
-                                "Fri, 2 Oct 2026",
+                                DateFormat('yyyy-MM-dd')
+                                    .format(widget.expenseModel.createdAt),
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -193,7 +188,8 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                                 ),
                               ),
                               Text(
-                                "1:15 PM",
+                                DateFormat('HH:mm a')
+                                    .format(widget.expenseModel.createdAt),
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -227,7 +223,7 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                                 ),
                               ),
                               Text(
-                                "Lunch with Sami",
+                                widget.expenseModel.note ?? "Example Note",
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -307,7 +303,7 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
             ],
           ),
           content: Text(
-            "Rs 850 (Food) will be removed from your October total. This can't be undone.",
+            "Rs ${widget.expenseModel.expValue.toString()} (${widget.expenseModel.category.name}) will be removed from your (${DateFormat('MMMM yyyy').format(widget.expenseModel.createdAt)}) total. This can't be undone.",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 15,

@@ -56,6 +56,7 @@ List<ExpenseModel> listOfExpenses = <ExpenseModel>[
     ),
     createdAt: DateTime.now(),
     expValue: 850,
+    note: "Lunch Note",
   ),
   ExpenseModel(
     name: "Careem Ride",
@@ -66,6 +67,7 @@ List<ExpenseModel> listOfExpenses = <ExpenseModel>[
     ),
     createdAt: DateTime.now(),
     expValue: 620,
+    note: "Transport note",
   ),
   ExpenseModel(
     name: "Pharmacy",
@@ -76,6 +78,7 @@ List<ExpenseModel> listOfExpenses = <ExpenseModel>[
     ),
     createdAt: DateTime.now(),
     expValue: 940,
+    note: "Health Note",
   ),
   ExpenseModel(
     name: "Daraz Order",
@@ -86,6 +89,7 @@ List<ExpenseModel> listOfExpenses = <ExpenseModel>[
     ),
     createdAt: DateTime.now(),
     expValue: 3200,
+    note: "Shopping Note",
   ),
   ExpenseModel(
     name: "K-Electric",
@@ -96,5 +100,6 @@ List<ExpenseModel> listOfExpenses = <ExpenseModel>[
     ),
     createdAt: DateTime.now(),
     expValue: 7400,
+    note: "Bill Note",
   ),
 ];

@@ -18,59 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List<ExpenseModel> listOfExpenses = <ExpenseModel>[
-  //   ExpenseModel(
-  //     name: "Biryani",
-  //     category: ExpenseCategory(
-  //       name: "Food",
-  //       icon: AppAsset.foodIcon,
-  //       color: AppColors.colorFFF1D6,
-  //     ),
-  //     createdAt: DateTime.now(),
-  //     expValue: 850,
-  //   ),
-  //   ExpenseModel(
-  //     name: "Careem Ride",
-  //     category: ExpenseCategory(
-  //       name: "Transport",
-  //       icon: AppAsset.transportIcon,
-  //       color: AppColors.colorDCEBFF,
-  //     ),
-  //     createdAt: DateTime.now(),
-  //     expValue: 620,
-  //   ),
-  //   ExpenseModel(
-  //     name: "Pharmacy",
-  //     category: ExpenseCategory(
-  //       name: "Health",
-  //       icon: AppAsset.healthIcon,
-  //       color: AppColors.colorFDE1DE,
-  //     ),
-  //     createdAt: DateTime.now(),
-  //     expValue: 940,
-  //   ),
-  //   ExpenseModel(
-  //     name: "Daraz Order",
-  //     category: ExpenseCategory(
-  //       name: "Shopping",
-  //       icon: AppAsset.shoppingIcon,
-  //       color: AppColors.colorFCE1EE,
-  //     ),
-  //     createdAt: DateTime.now(),
-  //     expValue: 3200,
-  //   ),
-  //   ExpenseModel(
-  //     name: "K-Electric",
-  //     category: ExpenseCategory(
-  //       name: "Bill",
-  //       icon: AppAsset.billIcon,
-  //       color: AppColors.colorEADFFD,
-  //     ),
-  //     createdAt: DateTime.now(),
-  //     expValue: 7400,
-  //   ),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,14 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              // ListView.separated(
-              //   itemCount: listOfExpenses.length,
-              //   shrinkWrap: true,
-              //   separatorBuilder: (context, index) => SizedBox(height: 10),
-              //   itemBuilder: (context, index) {
-              //     return _expenseCard(listOfExpenses[index]);
-              //   },
-              // ),
             ],
           ),
         ),
@@ -206,77 +145,60 @@ class _HomeScreenState extends State<HomeScreen> {
         color: AppColors.pureWhiteColor,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            spacing: 15,
-            children: [
-              _iconContainer(expenseModel.category),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ExpenseDetail(),
-                        ),
-                      );
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          expenseModel.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
-                            color: AppColors.color0F1B2D,
-                          ),
-                        ),
-                        Text(
-                          "Food - $formattedDate",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 13,
-                            color: AppColors.greyColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Text(
-                  //   expenseModel.name,
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.w700,
-                  //     fontSize: 15,
-                  //     color: AppColors.color0F1B2D,
-                  //   ),
-                  // ),
-                  // Text(
-                  //   "Food - $formattedDate",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.w400,
-                  //     fontSize: 13,
-                  //     color: AppColors.greyColor,
-                  //   ),
-                  // ),
-                ],
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ExpenseDetail(
+                expenseModel: expenseModel,
+                categoryIcon: _iconContainer(expenseModel.category),
+                // categoryIcon: expenseModel.category,
               ),
-            ],
-          ),
-          Text(
-            "Rs ${expenseModel.expValue.toString()}",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-              color: AppColors.blackColor,
             ),
-          ),
-        ],
+          );
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              spacing: 15,
+              children: [
+                _iconContainer(expenseModel.category),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      expenseModel.name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        color: AppColors.color0F1B2D,
+                      ),
+                    ),
+                    Text(
+                      "Food - $formattedDate",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                        color: AppColors.greyColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Text(
+              "Rs ${expenseModel.expValue.toString()}",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: AppColors.blackColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
