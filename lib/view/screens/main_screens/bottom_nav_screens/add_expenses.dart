@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/model/expense_model.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
+import 'package:flutter_expense_tracker_sami/utils/global.dart';
 import 'package:flutter_expense_tracker_sami/view/components/bottom_sheet/show_category_grid_view_sheet.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_button.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_text_field.dart';
@@ -76,6 +77,7 @@ class _AddExpensesState extends State<AddExpenses> {
           buttonColor: AppColors.greenColor,
           textColor: AppColors.pureWhiteColor,
           buttonText: "Save Expense",
+          onButtonTap: () => addExpensesToList(),
         ),
       ),
       body: SafeArea(
@@ -134,7 +136,14 @@ class _AddExpensesState extends State<AddExpenses> {
                       color: AppColors.greyColor,
                     ),
                   ),
-                  SizedBox(width: 150, child: CustomTextField()),
+                  SizedBox(
+                    width: 150,
+                    child: CustomTextField(
+                      showBorder: false,
+                      isNumberInput: true,
+                      textFieldController: expenseTextEditingController,
+                    ),
+                  ),
                 ],
               ),
               Container(
@@ -145,6 +154,41 @@ class _AddExpensesState extends State<AddExpenses> {
                 ),
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            spacing: 20,
+                            children: [
+                              SizedBox(
+                                width: 70,
+                                child: Text(
+                                  "Name",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppColors.greyColor,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 260,
+                                child: CustomTextField(
+                                  hintText: "Type Name here",
+                                  showBorder: false,
+                                  textFieldController:
+                                      nameTextEditingController,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 20),
+                        ],
+                      ),
+                    ),
+                    Divider(color: AppColors.whiteColor),
                     SizedBox(
                       height: 50,
                       child: InkWell(
@@ -282,6 +326,9 @@ class _AddExpensesState extends State<AddExpenses> {
                                 width: 260,
                                 child: CustomTextField(
                                   hintText: "Lunch with Sami",
+                                  showBorder: false,
+                                  textFieldController:
+                                      noteTextEditingController,
                                 ),
                               ),
                             ],
@@ -334,6 +381,7 @@ class _AddExpensesState extends State<AddExpenses> {
   }
 
   String formattedDate = "Select Date";
+  DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate() async {
     final DateTime? pickDate = await showDatePicker(
@@ -346,6 +394,23 @@ class _AddExpensesState extends State<AddExpenses> {
     setState(() {
       formattedDate = DateFormat('yyyy-MM-dd')
           .format(pickDate ?? DateTime.now());
+      selectedDate = pickDate ?? DateTime.now();
     });
+  }
+
+  TextEditingController expenseTextEditingController = TextEditingController();
+  TextEditingController nameTextEditingController = TextEditingController();
+  TextEditingController noteTextEditingController = TextEditingController();
+
+  void addExpensesToList() {
+    listOfExpenses.add(
+      ExpenseModel(
+        name: nameTextEditingController.text,
+        category: selectedCategory,
+        createdAt: selectedDate,
+        expValue: double.parse(expenseTextEditingController.text),
+      ),
+    );
+    Navigator.pop(context);
   }
 }
