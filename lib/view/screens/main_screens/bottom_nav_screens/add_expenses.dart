@@ -412,5 +412,6 @@ class _AddExpensesState extends State<AddExpenses> {
       ),
     );
     Navigator.pop(context);
+    setState(() {});
   }
 }

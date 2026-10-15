@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
-import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/add_expenses.dart';
+// import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/add_expenses.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/expense_screen.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/home_screen.dart';
 import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/setting_screen.dart';
@@ -36,23 +36,6 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: listOfScreens[_selectedIndex],
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddExpenses()),
-          );
-        },
-        backgroundColor: AppColors.greenColor,
-        child: SvgPicture.asset(
-          AppAsset.addIcon,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        ),
-      ),
-
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
