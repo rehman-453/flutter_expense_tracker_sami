@@ -19,9 +19,9 @@ class ExpenseCategory {
   final String name;
   final String icon;
   final Color color;
-  final bool isSelected;
+  bool isSelected;
 
-  const ExpenseCategory({
+  ExpenseCategory({
     required this.name,
     required this.icon,
     required this.color,

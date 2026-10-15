@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/model/expense_model.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
+import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/expense_detail.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:intl/intl.dart';
@@ -197,22 +198,53 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    expenseModel.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                      color: AppColors.color0F1B2D,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ExpenseDetail(),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          expenseModel.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15,
+                            color: AppColors.color0F1B2D,
+                          ),
+                        ),
+                        Text(
+                          "Food - $formattedDate",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13,
+                            color: AppColors.greyColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    "Food - $formattedDate",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      color: AppColors.greyColor,
-                    ),
-                  ),
+                  // Text(
+                  //   expenseModel.name,
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w700,
+                  //     fontSize: 15,
+                  //     color: AppColors.color0F1B2D,
+                  //   ),
+                  // ),
+                  // Text(
+                  //   "Food - $formattedDate",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w400,
+                  //     fontSize: 13,
+                  //     color: AppColors.greyColor,
+                  //   ),
+                  // ),
                 ],
               ),
             ],

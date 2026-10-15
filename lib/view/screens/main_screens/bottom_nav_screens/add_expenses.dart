@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/model/expense_model.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
+import 'package:flutter_expense_tracker_sami/view/components/bottom_sheet/show_category_grid_view_sheet.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_button.dart';
 import 'package:flutter_expense_tracker_sami/view/components/custom_text_field.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,6 +21,7 @@ class _AddExpensesState extends State<AddExpenses> {
       name: "Food",
       icon: AppAsset.foodIcon,
       color: AppColors.colorFFF1D6,
+      isSelected: true,
     ),
     ExpenseCategory(
       name: "Transport",
@@ -51,12 +53,19 @@ class _AddExpensesState extends State<AddExpenses> {
       icon: AppAsset.educationIcon,
       color: AppColors.colorE4F0CF,
     ),
-    ExpenseCategory(
-      name: "Other",
-      icon: AppAsset.otherIcon,
-      color: AppColors.colorE7EAEE,
-    ),
+    // ExpenseCategory(
+    //   name: "Other",
+    //   icon: AppAsset.otherIcon,
+    //   color: AppColors.colorE7EAEE,
+    // ),
   ];
+
+  ExpenseCategory selectedCategory = ExpenseCategory(
+    name: "Food",
+    icon: AppAsset.foodIcon,
+    color: AppColors.colorFFF1D6,
+    isSelected: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -163,14 +172,28 @@ class _AddExpensesState extends State<AddExpenses> {
                                   spacing: 10,
                                   children: [
                                     _iconContainer(
+                                      //   ExpenseCategory(
+                                      //     name: "Food",
+                                      //     icon: AppAsset.foodIcon,
+                                      //     color: AppColors.colorFFF1D6,
+                                      //   ),
+                                      // ),
+                                      // Text(
+                                      //   "Food",
+                                      //   style: TextStyle(
+                                      //     fontSize: 15,
+                                      //     fontWeight: FontWeight.w700,
+                                      //     color: AppColors.blackColor,
+                                      //   ),
+                                      // ),
                                       ExpenseCategory(
-                                        name: "Food",
-                                        icon: AppAsset.foodIcon,
-                                        color: AppColors.colorFFF1D6,
+                                        name: selectedCategory.name,
+                                        icon: selectedCategory.icon,
+                                        color: selectedCategory.color,
                                       ),
                                     ),
                                     Text(
-                                      "Food",
+                                      selectedCategory.name,
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700,
@@ -277,145 +300,26 @@ class _AddExpensesState extends State<AddExpenses> {
     );
   }
 
-  void showGridViewBottomSheet() {
-    showModalBottomSheet(
+  void showGridViewBottomSheet() async {
+    final result = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return Container(
-          height: 500,
-          width: double.infinity,
-          padding: const EdgeInsets.only(
-            top: 15,
-            left: 10,
-            right: 10,
-            bottom: 15,
-          ),
-          decoration: BoxDecoration(
-            color: AppColors.pureWhiteColor,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Choose category",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.color0F1B2D,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.whiteColor),
-                      ),
-                      child: const Icon(Icons.close),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 10),
-
-              Expanded(
-                child: GridView.builder(
-                  itemCount: listOfCategories.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 1.2,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: listOfCategories[index].isSelected
-                            ? AppColors.colorD5F3EF
-                            : AppColors.pureWhiteColor,
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: AppColors.whiteColor),
-                      ),
-                      child: Stack(
-                        children: [
-                          listOfCategories[index].isSelected
-                              ? Positioned(
-                                  right: 5,
-                                  top: 10,
-                                  child: Container(
-                                    padding: EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.greenColor,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Icon(
-                                      Icons.check,
-                                      color: AppColors.pureWhiteColor,
-                                      size: 18,
-                                    ),
-                                  ),
-                                )
-                              : SizedBox(),
-                          Positioned(
-                            left: 0,
-                            right: 0,
-                            top: 0,
-                            bottom: 0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              spacing: 7,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: listOfCategories[index].color,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    listOfCategories[index].icon,
-                                  ),
-                                ),
-                                Text(
-                                  listOfCategories[index].name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13,
-                                    color: AppColors.color0F1B2D,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              CustomButton(
-                buttonColor: AppColors.greenColor,
-                buttonText: "Done",
-                textColor: AppColors.pureWhiteColor,
-              ),
-            ],
-          ),
-        );
+        return ShowCategoryGridViewSheet(listOfCategory: listOfCategories);
       },
     );
+
+    // print(
+    //   "---------------------------selected category from bottom sheet--------------------------",
+    // );
+    // print(result.name.toString());
+    selectedCategory = ExpenseCategory(
+      name: result.name,
+      icon: result.icon,
+      color: result.color,
+    );
+    setState(() {});
   }
 
   Widget _iconContainer(ExpenseCategory expenseCategory) {

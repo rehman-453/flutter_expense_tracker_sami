@@ -17,4 +17,5 @@ class AppAsset {
   static final String funIcon = "assets/icons/fun_icon.svg";
   static final String educationIcon = 'assets/icons/education_icon.svg';
   static final String otherIcon = 'assets/icons/other_icon.svg';
+  static final String deleteIcon = 'assets/icons/delete_icon.svg';
 }
