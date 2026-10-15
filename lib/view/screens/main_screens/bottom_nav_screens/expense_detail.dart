@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_colors.dart';
 import 'package:flutter_expense_tracker_sami/utils/app_asset.dart';
+import 'package:flutter_expense_tracker_sami/view/components/custom_button.dart';
+import 'package:flutter_expense_tracker_sami/view/screens/main_screens/bottom_nav_screens/edit_expense.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ExpenseDetail extends StatefulWidget {
@@ -46,15 +48,29 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColors.pureWhiteColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.whiteColor),
+                  GestureDetector(
+                    onTap: () {
+                      _showDeleteDialog(context);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppColors.pureWhiteColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.whiteColor),
+                      ),
+                      child: SvgPicture.asset(AppAsset.deleteIcon),
                     ),
-                    child: SvgPicture.asset(AppAsset.deleteIcon),
                   ),
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.pureWhiteColor,
+                  //     shape: BoxShape.circle,
+                  //     border: Border.all(color: AppColors.whiteColor),
+                  //   ),
+                  //   child: SvgPicture.asset(AppAsset.deleteIcon),
+                  // ),
                 ],
               ),
               Container(
@@ -225,10 +241,126 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                   ],
                 ),
               ),
+              SizedBox(height: 50),
+              CustomButton(
+                buttonColor: AppColors.greenColor,
+                textColor: AppColors.pureWhiteColor,
+                buttonText: "Edit Expense",
+                onButtonTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditExpense(),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: 10),
+              CustomButton(
+                buttonColor: AppColors.whiteColor,
+                textColor: AppColors.blackColor,
+                buttonText: "Delete Expense",
+                onButtonTap: () => _showDeleteDialog(context),
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showDeleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: AppColors.colorFDE8E6,
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: AppColors.colorFDE8E6),
+                ),
+                child: SvgPicture.asset(
+                  AppAsset.deleteIcon,
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.colorB42318,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Delete this Expense',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.blackColor,
+                ),
+              ),
+            ],
+          ),
+          content: Text(
+            "Rs 850 (Food) will be removed from your October total. This can't be undone.",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: AppColors.greyColor,
+            ),
+          ),
+          // actions: [
+          //   Column(
+          //     children: [
+          //       CustomButton(
+          //         buttonColor: AppColors.pureWhiteColor,
+          //         textColor: AppColors.blackColor,
+          //         buttonText: "Cancel",
+          //       ),
+          //       SizedBox(width: 10),
+          //       CustomButton(
+          //         buttonColor: AppColors.colorB42318,
+          //         textColor: AppColors.pureWhiteColor,
+          //         buttonText: "Delete",
+          //       ),
+          //     ],
+          //   ),
+          // ],
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: CustomButton(
+                    onButtonTap: () {
+                      Navigator.pop(context);
+                    },
+                    buttonColor: AppColors.pureWhiteColor,
+                    textColor: AppColors.blackColor,
+                    buttonText: "Cancel",
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: CustomButton(
+                    onButtonTap: () {
+                      Navigator.pop(context);
+                    },
+                    buttonColor: AppColors.colorB42318,
+                    textColor: AppColors.pureWhiteColor,
+                    buttonText: "Delete",
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

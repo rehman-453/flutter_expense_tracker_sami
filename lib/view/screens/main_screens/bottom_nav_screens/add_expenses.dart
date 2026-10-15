@@ -325,7 +325,7 @@ class _AddExpensesState extends State<AddExpenses> {
                               SizedBox(
                                 width: 260,
                                 child: CustomTextField(
-                                  hintText: "Lunch with Sami",
+                                  hintText: "Enter your notes here...",
                                   showBorder: false,
                                   textFieldController:
                                       noteTextEditingController,
