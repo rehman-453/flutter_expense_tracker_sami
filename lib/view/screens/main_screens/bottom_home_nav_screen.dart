@@ -46,23 +46,6 @@ class _BottomHomeNavScreenState extends State<BottomHomeNavScreen> {
             icon: SvgPicture.asset(AppAsset.expenseIcon),
             label: 'Expense',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Container(
-          //     padding: const EdgeInsets.all(10),
-          //     decoration: BoxDecoration(
-          //       color: AppColors.greenColor,
-          //       borderRadius: BorderRadius.circular(25),
-          //     ),
-          //     child: SvgPicture.asset(
-          //       AppAsset.addIcon,
-          //       colorFilter: const ColorFilter.mode(
-          //         Colors.white,
-          //         BlendMode.srcIn,
-          //       ),
-          //     ),
-          //   ),
-          //   label: 'Add Expense',
-          // ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AppAsset.summaryIcon),
             label: 'Summary',
